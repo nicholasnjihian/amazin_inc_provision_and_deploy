@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+
+  pre_tasks: 
+   - name: Update apt cache every day i.e after 86400 seconds have elapsed.
+     apt: update_cache=yes cache_valid_time=86400
+     
+  tasks:
+   - name: Install git,curl and ntp 
+     apt: name={{ item }} state=present
+     with_items:
+      - git
+      - curl
+      - ntp
+   - name: Start NTP 
+     service: name=ntp state=started enabled=yes
