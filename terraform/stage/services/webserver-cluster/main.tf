@@ -40,7 +40,7 @@ locals {
 #availability zone/region Africa(South Africa)
 #------------------------------------------------
 resource "aws_instance" "base" {
-  ami           = "ami-0ec47ddb564d75b64"
+  ami           = "${var.AMI_ID}"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sec_instance.id]  
 
@@ -70,7 +70,7 @@ resource "aws_security_group" "sec_instance" {
 #The first step in creating an ASG is to create a launch configuration,
 #which specifies how to configure each EC2 Instance in the Auto-Scaling Group.
 resource "aws_launch_configuration" "amazin_inc_launch_config" {
-  image_id = "ami-0ec47ddb564d75b64"
+  image_id = "${var.AMI_ID}"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.instance.id]
 }

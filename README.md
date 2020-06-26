@@ -5,13 +5,11 @@ PROVISION AND DEPLOY.
 
 *This README describes how I have provisioned and deployed a golang backend and a React frontend through Infrastructure as Code, Cloud Infrastructure & Configuration Management.*
 
-1. I have used Terraform to come up with a configuration state for the cloud resources required and to provision the infrastructure. Terraform enables DevOps teams to define and provision cloud infrastructure using a very high-level and human-readable language known as Hashicorp Configuration Language, or optionally JSON.
+1. I have used Terraform to provision the infrastructure. Terraform enables DevOps teams to define and provision cloud infrastructure using a very high-level and human-readable language known as Hashicorp Configuration Language, or optionally JSON.
 
-2. Terraform will need an Amazon machine Image that I provide through Packer which is another open-source tool by HashiCorp that automates the creation of machine images. Packer can create Images for multiple platforms like Docker, AWS, Oracle VirtualBox, Linode, Azure,OpenStack,etc. Packer uses JSON to define its Packer templates, i.e configuration files.
+2. I have then used Packer to automate the build of custom machine images with all packages installed beforehand so that Terraform uses this AMI for provisioning. Packer can create Images for multiple platforms like Docker, AWS, Oracle VirtualBox, Linode, Azure,OpenStack,etc. Packer uses JSON to define its Packer templates, i.e configuration files.
 
-3. I also use Ansible to do the actual configuration management, that is to configure the software in the OS and to install required software and to bring our cloud resources to the state that we desire. I have done this through Ansible playbook. However, here I use Ansible within Packer because Packer supports provisioners such as Ansible, Shell, Chef, among others.
-
-4. The DB(Postgres is located in RDS) and physical backup snapshots are sent to S3.
+3. I also use Ansible as Packer's provisioner. Packer is a server-templating tool and it uses provisioners such as shell,Chef, Ansible and Salt for configuration management.
 
 
 #REQUIREMENTS
@@ -40,3 +38,16 @@ Terraform requires this in its set up of Postgres on AWS RDS. This can be done b
 
 `$ export TF_VAR_db_password = "YOUR DATABASE PASSWORD HERE"`
 \nNOTE: There is a space before export so as not to store such sensitive info as a database password on disk in bash history.
+
+##STEP 2:
+Change directory into the root directory where the packer and terraform directories are located. 
+Change directory into the scripts directory:
+Then run the shell command:
+`./pipeline.sh`
+
+This command will install terraform, packer, build the AMI, install software through Ansible like git, curl, postgres and Go, among others, and then provision our RDS instance, EC2 instance for our servers and s3 and DynamoDB instances(necessary because of version control of our Terraform state).
+
+
+
+
+

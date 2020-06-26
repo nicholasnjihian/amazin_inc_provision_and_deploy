@@ -29,7 +29,7 @@ several problems:
 #CODE:
 #-------
 provider "aws" {
-  region = af-south-1
+  region = "${var.region}"
 }
 
 
@@ -86,7 +86,7 @@ terraform {
   backend "s3" {
     bucket = "amazin_inc_state_mngmt_2020_26_June"
     key    = "global/s3/terraform.tfstate"
-    region = "af-south-1"
+    region = "${var.region}"
     dynamodb_table = "amazin_inc_dynamodb_terraform_lock_state"
     encrypt        = true
   }

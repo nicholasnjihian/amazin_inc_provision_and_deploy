@@ -7,11 +7,74 @@
      apt: update_cache=yes cache_valid_time=86400
      
   tasks:
-   - name: Install git,curl and ntp 
-     apt: name={{ item }} state=present
-     with_items:
-      - git
-      - curl
-      - ntp
+   - name: Install git,curl bash, OpenSSL, pip3, wget and ntp necessary packages. 
+     apt:
+       name:
+         - ntp
+         - bash
+         - openssl
+         - libssl-dev 
+         - git
+         - wget
+         - curl
+         - python3-pip 
+         - ufw
+       state=present
+       update_cache: true
+
    - name: Start NTP 
      service: name=ntp state=started enabled=yes
+
+
+   - name: Add Docker Repository
+     apt_repository:
+       repo: deb https://download.docker.com/linux/ubuntu bionic stable
+       state: present
+
+   - name: Update apt and install docker-ce
+     apt: update_cache=yes name=docker-ce state=latest
+
+   - name: Install Docker Module for Python
+     pip:
+       name: docker
+
+   - name: Install PostgreSQL
+     apt:
+       name:
+         - postgresql
+         - postgresql-contrib
+         - libpq-dev
+         - python-psycopg2
+         state: present 
+       update_cache: true 
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+      
+    - name: Download Docker-compose
+      shell: >
+        curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - name: Apply executable permissions to the downloaded binary
+      shell:
+        chmod +x /usr/local/bin/docker-compose
+    
+    - name: Get Go and then set environmental variables for $GOPATH and $GOBIN
+      shell: >
+        wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzvf go1.14.4.linux-amd64.tar.gz
+        rm -rf go1.14.4.linux-amd64.tar.gz 
+        sudo echo "PATH"=$PATH:/usr/local/go/bin | tee --append /etc/profile 
+        sudo echo "export GOPATH=$HOME/go" | tee --append /etc/profile 
+        sudo echo "export "GOBIN=$HOME/go/bin" | tee --append /etc/profile
+    - name: Git Clone Infrastructure Interview Repository   
+      git:
+        repo: https://github.com/ictlife/infra-interview-may-2020.git 
+        dest: $HOME 
+    - name: Configure backend    
+      shell: >
+        chdir=$HOME/infra-interview-may-2020/backend
+      command: >
+        cp docker-compose.yml.sample docker-compose.yml
+      command: npm install
+      command: docker-compose up
+      command: go get -u github.com/pressly/goose/cmd/goose 
