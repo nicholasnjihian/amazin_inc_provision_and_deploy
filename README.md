@@ -12,10 +12,10 @@ PROVISION AND DEPLOY.
 3. I also use Ansible as Packer's provisioner. Packer is a server-templating tool and it uses provisioners such as shell,Chef, Ansible and Salt for configuration management.
 
 
-#REQUIREMENTS
-
-##STEP 1: AWS CREDENTIALS(AWS ACCESS KEY AND AWS SECRET KEY):
-
+REQUIREMENTS
+---
+STEP 1: AWS CREDENTIALS(AWS ACCESS KEY AND AWS SECRET KEY):
+---
 - Terraform uses the AWS credentials already in our system. That is, we should already have installed the AWS CLI and configured it using the aws configure command. 
 - To get these AWS credentials a non-root IAM user (and group) has to be set up on the AWS Management Web Console. The IAM user will have the following policies:
 i. 
@@ -34,6 +34,7 @@ If you need to install AWS CLI on Windows, instructions are at http://docs.aws.a
 _Note: You may need to change the default location used but you have to take into consideration that the Machine Image(AMI) is specific to geographic location/availability zone. This region has to be changed in the packer json template file as Packer is the image builder._
 
 SET DATABASE PASSWORD AS ENVIRONMENT VARIABLE
+---
 Terraform requires this in its set up of Postgres on AWS RDS. This can be done by running:
 
 `$ export TF_VAR_db_password = "YOUR DATABASE PASSWORD HERE"`
