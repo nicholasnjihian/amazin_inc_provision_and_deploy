@@ -35,8 +35,8 @@ If you need to install AWS CLI on Windows, instructions are at http://docs.aws.a
 
 _Note: You may need to change the default location used but you have to take into consideration that the Machine Image(AMI) is specific to geographic location/availability zone. This region has to be changed in the packer json template file as Packer is the image builder._
 
-###SET DATABASE PASSWORD AS ENVIRONMENT VARIABLE
+SET DATABASE PASSWORD AS ENVIRONMENT VARIABLE
 Terraform requires this in its set up of Postgres on AWS RDS. This can be done by running:
 
 `$ export TF_VAR_db_password = "YOUR DATABASE PASSWORD HERE"`
-NOTE: There is a space before export so as not to store such sensitive info as a database password on disk in bash history.
+\nNOTE: There is a space before export so as not to store such sensitive info as a database password on disk in bash history.
