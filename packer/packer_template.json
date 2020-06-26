@@ -2,9 +2,9 @@
 	"variables": {
 		"access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
 		"secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-		"region": "us-east-1",
+		"region": "af-south-1",
 		"ssh_username": "ec2_user",
-		"base_ami": "",
+		"base_ami": "ami-0ec47ddb564d75b64",
 		"instance_type": "t2.micro"
 		},
 		"builders": [{
@@ -21,7 +21,7 @@
 		"provisioners": [
 			{
 				"type": "ansible",
-				"playbook_file": "./playbook.yml"
+				"playbook_file": "./ansible_config/playbook.yml"
 
 			}
 		]

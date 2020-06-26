@@ -4,16 +4,11 @@
 --------------
 --------------
 
-#We need to install Jenkins for CI-CD
-#Jenkins has Java 8 as a dependency so we will also install java.
-#We will be using Jenkins CLI rather than the web dashboard
-#at port 8080 to achieve a fully automated pipeline.
-
-#We also need Terraform which enables us to specify which 
+#Terraform -> enables us to specify which 
 #resources we need and which cloud provider and then proceed to deploy said resources.
 
-#We also need Packer which we will use to build our AMI images for the 
-#AWS EC2 resources. This are the AMI images Terraform will use.
+#Packer -> enables us to build our AMI images for the 
+#AWS EC2 resources. These are the AMI images Terraform will use.
 #Our configuration management is done via Shell or Ansible 
 #but that is handled within Packer via the Packer's provisioner block.
 
@@ -25,12 +20,13 @@
 #Urls and versions for Packer and Terraform may change so check these urls:
 #https://www.packer.io/downloads.html --> for Packer
 #https://learn.hashicorp.com/terraform/getting-started/install
-wget https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip
-wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip
+VERSION_NUM=1.6.0
+wget https://releases.hashicorp.com/packer/$VERSION_NUM/packer_$VERSION_NUM_linux_amd64.zip
+wget https://releases.hashicorp.com/terraform/$VERSION_NUM/terraform_$VERSION_NUM_linux_amd64.zip
 
 
 
-#2. INSTALLING OUR SOFTWARE(Terraform, Packer and Jenkins).
+#2. INSTALLING OUR SOFTWARE(Terraform, Packer).
 ----------------------------------------------------------
 ----------------------------------------------------------
 
@@ -109,8 +105,8 @@ install_for_suse(){
 
 #The command below unzips the Terraform and Packer binaries and moves them to /usr/local/bin
 unzip_terraform_and_packer_binaries() {
-	unzip terraform_0.12.26_linux_amd64.zip
-	unzip packer_1.6.0_linux_amd64.zip
+	unzip terraform_$VERSION_NUM_linux_amd64.zip
+	unzip packer_$VERSION_NUM_linux_amd64.zip
 }
 
 
