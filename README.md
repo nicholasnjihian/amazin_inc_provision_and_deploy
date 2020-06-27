@@ -48,7 +48,7 @@ Then run the shell command:
 `./pipeline.sh`
 
 This command will install terraform, packer, build the AMI, install software through Ansible like git, curl, postgres and Go, among others, and then provision our RDS instance, EC2 instance for our servers and s3 and DynamoDB instances(necessary because of version control of our Terraform state).
-![Cloud Architecture](/home/nicknjihia/Desktop/terraform_images)
+![Cloud Architecture](https://github.com/nicholasnjihian/amazin_inc_provision_and_deploy/blob/master/images/terraform.png)
 
 
 
