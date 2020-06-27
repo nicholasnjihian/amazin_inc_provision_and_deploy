@@ -18,11 +18,12 @@ STEP 1: AWS CREDENTIALS(AWS ACCESS KEY AND AWS SECRET KEY):
 ---
 - Terraform uses the AWS credentials already in our system. That is, we should already have installed the AWS CLI and configured it using the aws configure command. 
 - To get these AWS credentials a non-root IAM user (and group) has to be set up on the AWS Management Web Console. The IAM user will have the following policies:
+---
 i. 
 ii.
 iii.
 iv.
-
+---
 Alternatively and even better(and for better security), we can use environmental variables to provide our AWS credentials, i.e. `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` representing the AWS secret key and access key respectively.
 Once AWS CLI is configured, the credentials are stored in the '~/.aws/credentials' file (on OS X). 
 So these commands would be:
@@ -47,7 +48,7 @@ Then run the shell command:
 `./pipeline.sh`
 
 This command will install terraform, packer, build the AMI, install software through Ansible like git, curl, postgres and Go, among others, and then provision our RDS instance, EC2 instance for our servers and s3 and DynamoDB instances(necessary because of version control of our Terraform state).
-
+![Cloud Architecture](/home/nicknjihia/Desktop/terraform_images)
 
 
 
