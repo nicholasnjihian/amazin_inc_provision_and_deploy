@@ -45,9 +45,12 @@ Terraform requires this in its set up of Postgres on AWS RDS. This can be done b
 Change directory into the root directory where the packer and terraform directories are located. 
 Change directory into the scripts directory:
 Then run the shell command:
-`./pipeline.sh`
+```./pipeline.sh```
 
 This command will install terraform, packer, build the AMI, install software through Ansible like git, curl, postgres and Go, among others, and then provision our RDS instance, EC2 instance for our servers and s3 and DynamoDB instances(necessary because of version control of our Terraform state).
+
+##ARCHITECTURE FOR THIS INFRASTRUCTURE:
+
 ![Cloud Architecture](https://github.com/nicholasnjihian/amazin_inc_provision_and_deploy/blob/master/images/terraform.png)
 
 
