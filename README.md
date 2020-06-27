@@ -18,12 +18,12 @@ STEP 1: AWS CREDENTIALS(AWS ACCESS KEY AND AWS SECRET KEY):
 ---
 - Terraform uses the AWS credentials already in our system. That is, we should already have installed the AWS CLI and configured it using the aws configure command. 
 - To get these AWS credentials a non-root IAM user (and group) has to be set up on the AWS Management Web Console. The IAM user will have the following policies:
-> i. AmazonEC2FullAccess 
-> ii. AmazonS3FullAccess
-> iii. AmazonDynamoDBFullAccess
-> iv. AmazonRDSFullAccess
-> v. CloudWatchFullAccess
-> vi. IAMFullAccess
+> - AmazonEC2FullAccess 
+> - AmazonS3FullAccess
+> - AmazonDynamoDBFullAccess
+> - AmazonRDSFullAccess
+> - CloudWatchFullAccess
+> - IAMFullAccess
 
 Alternatively and even better(and for better security), we can use environmental variables to provide our AWS credentials, i.e. `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` representing the AWS secret key and access key respectively.
 Once AWS CLI is configured, the credentials are stored in the '~/.aws/credentials' file (on OS X). 
