@@ -41,7 +41,7 @@ Terraform requires this in its set up of Postgres on AWS RDS. This can be done b
 `$ export TF_VAR_db_password = "YOUR DATABASE PASSWORD HERE"`
 \nNOTE: There is a space before export so as not to store such sensitive info as a database password on disk in bash history.
 
-##STEP 2:
+## STEP 2:
 Change directory into the root directory where the packer and terraform directories are located. 
 Change directory into the scripts directory:
 Then run the shell command:
@@ -49,7 +49,7 @@ Then run the shell command:
 
 This command will install terraform, packer, build the AMI, install software through Ansible like git, curl, postgres and Go, among others, and then provision our RDS instance, EC2 instance for our servers and s3 and DynamoDB instances(necessary because of version control of our Terraform state).
 
-##ARCHITECTURE FOR THIS INFRASTRUCTURE:
+## ARCHITECTURE FOR THIS INFRASTRUCTURE:
 
 ![Cloud Architecture](https://github.com/nicholasnjihian/amazin_inc_provision_and_deploy/blob/master/images/terraform.png)
 
