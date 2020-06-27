@@ -51,6 +51,9 @@ __NOTE:__ There is a space before export so as not to store such sensitive info 
 ## STEP 2:
 Change directory into the root directory where the packer and terraform directories are located. 
 Change directory into the scripts directory:
+```bash
+cd scripts/
+```
 Then run the shell command:
 
 ```bash
